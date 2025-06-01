@@ -1,12 +1,48 @@
-{% extends "core/base.html" %}
-
+{% extends "base.html" %}
 {% block titulo %}Inicio{% endblock %}
 
 {% block contenido %}
+<div class="container mt-4">
+  <h2>Bienvenido al Sistema de Reciclaje Municipal</h2>
 
+  <div class="card mb-4">
+    <div class="card-header bg-success text-white">
+      <h5>Métricas de Reciclaje</h5>
+    </div>
+    <div class="card-body">
 
-<h1>Página de Inicio</h1>
-<p>Bienvenido a la plataforma de reciclaje.</p>
+      <div class="mb-3">
+        <h6>Solicitudes por Mes:</h6>
+        <ul>
+          {% for item in solicitudes_por_mes %}
+            <li>{{ item.mes|date:"F Y" }}: {{ item.total }} solicitudes</li>
+          {% empty %}
+            <li>No hay datos disponibles.</li>
+          {% endfor %}
+        </ul>
+      </div>
 
+      <div class="mb-3">
+        <h6>Materiales más reciclados:</h6>
+        <ul>
+          {% for item in materiales_mas_reciclados %}
+            <li>{{ item.tipo_material }}: {{ item.total }} solicitudes</li>
+          {% empty %}
+            <li>No hay datos disponibles.</li>
+          {% endfor %}
+        </ul>
+      </div>
 
+      <div>
+        <h6>Promedio de cantidad reciclada (solo en kilogramos):</h6>
+        {% if promedio_kg %}
+          <p>{{ promedio_kg|floatformat:1 }} kg por solicitud</p>
+        {% else %}
+          <p>No hay datos suficientes.</p>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</div>
 {% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block titulo %}Perfil{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+  <h2>Perfil de {{ user.username }}</h2>
+
+  {% if ciudadano %}
+    <p><strong>Dirección:</strong> {{ ciudadano.direccion }}</p>
+    <p><strong>Teléfono:</strong> {{ ciudadano.telefono }}</p>
+  {% endif %}
+
+  <hr>
+  <h4>Mis Solicitudes</h4>
+
+  {% if solicitudes %}
+    <div class="row">
+      {% for solicitud in solicitudes %}
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5>{{ solicitud.get_tipo_material_display }}</h5>
+              <p><strong>Cantidad:</strong> {{ solicitud.cantidad }} kg</p>
+              <p><strong>Fecha de retiro:</strong> {{ solicitud.fecha_retiro }}</p>
+              <p><strong>Dirección:</strong> {{ solicitud.direccion_retiro }}</p>
+              <p><strong>Estado:</strong> {{ solicitud.estado|capfirst }}</p>
+              {% if solicitud.comentario %}
+                <p><strong>Comentario:</strong> {{ solicitud.comentario }}</p>
+              {% endif %}
+
+              <form method="post" action="{% url 'eliminar_solicitud' solicitud.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm mt-2">Eliminar solicitud</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No hay solicitudes que mostrar.</p>
+  {% endif %}
+</div>
+{% endblock %}

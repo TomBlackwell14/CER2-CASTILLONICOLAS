@@ -1,8 +1,81 @@
-{% extends "core/base.html" %}
-
-{% block titulo %}Información General{% endblock %}
-
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Información sobre el reciclaje municipal{% endblock %}
 {% block contenido %}
+
 <h1>Materiales reciclables</h1>
-<p>Esta página muestra información pública sobre reciclaje.</p>
+<p>Aquí van los tipos de materiales aceptados en el reciclaje municipal.</p>
+<ul>
+  <li><strong>PAP</strong>: Papel y cartón (sin plásticos ni espirales).</li>
+  <li><strong>PLAS</strong>: Botellas PET, tapas plásticas, envases.</li>
+  <li><strong>VID</strong>: Vidrios (no rotos, sin tapas).</li>
+  <li><strong>LAT</strong>: Latas de aluminio o conservas.</li>
+  <li><strong>ELEC</strong>: Electrónicos pequeños (celulares, tablets).</li>
+  <li><strong>TEX</strong>: Textiles (ropa buena, cortinas, sábanas).</li>
+  <li><strong>VOL</strong>: Voluminosos reciclables (muebles, colchones).</li>
+</ul>
+
+<hr>
+
+<h2>Puntos limpios disponibles</h2>
+<ul>
+  <li><strong>Viña del Mar (Centro):</strong> Calle Von Schroeder 213, Viña del Mar, Valparaíso - Centro de reciclaje municipal. Lunes a sábado de 10:00 a 17:00</li>
+  <li><strong>Viña del Mar (Centro):</strong> Calle 4 Nte. 1179, 2531120 Viña del Mar, Valparaíso - Recicladora Nacional De Metales S.A.</li>
+  <li><strong>Viña del Mar (El Salto):</strong> Calle Limache 2523-2431, 2562327 Viña del Mar, Valparaíso - Punto De Reciclaje Botellas Plásticas PET. Miércoles y sábados de 11:00 a 18:00</li>
+</ul>
+
+<hr>
+
+<h2>Recomendaciones </h2>
+
+<div style="width: 80%; max-width: 500px; margin: 0 auto;">
+  <div id="recomendacionesCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+      <div class="carousel-item active">
+        <img src="{% static 'img/reciclaje1.png' %}" class="d-block w-100" alt="Enjuagar envases">
+        <div class="carousel-caption">
+          <p>Enjuaga los envases</p>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <img src="{% static 'img/reciclaje2.png' %}" class="d-block w-100" alt="Separar materiales">
+        <div class="carousel-caption">
+          <p>Separa los materiales</p>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <img src="{% static 'img/reciclaje3.png' %}" class="d-block w-100" alt="No reciclar sucio">
+        <div class="carousel-caption">
+          <p>No recicles basura sucia</p>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <img src="{% static 'img/reciclaje4.png' %}" class="d-block w-100" alt="Bolsas transparentes">
+        <div class="carousel-caption">
+          <p>Usa bolsas transparentes</p>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <img src="{% static 'img/reciclaje5.png' %}" class="d-block w-100" alt="Compactar botellas">
+        <div class="carousel-caption">
+          <p>Compacta los envases</p>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#recomendacionesCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#recomendacionesCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+</div>
+
 {% endblock %}

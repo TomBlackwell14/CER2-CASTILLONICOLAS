@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block titulo %}Confirmar Eliminación{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+  <h2>Confirmar Eliminación</h2>
+  <p>¿Estás seguro de que deseas eliminar esta solicitud de retiro?</p>
+
+  <ul>
+    <li><strong>Tipo de material:</strong> {{ solicitud.get_tipo_material_display }}</li>
+    <li><strong>Cantidad:</strong> {{ solicitud.cantidad }} kg</li>
+    <li><strong>Fecha de retiro:</strong> {{ solicitud.fecha_retiro }}</li>
+    <li><strong>Dirección:</strong> {{ solicitud.direccion_retiro }}</li>
+  </ul>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    <a href="{% url 'perfil' %}" class="btn btn-secondary ms-2">Cancelar</a>
+  </form>
+</div>
+{% endblock %}

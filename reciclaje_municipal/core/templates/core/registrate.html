@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block titulo %}Registro de Ciudadano{% endblock %}
+
+{% block contenido %}
+<div style="max-width: 600px; margin: 30px auto;">
+  <h2>Registrarse</h2>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <p>
+      <label for="id_usuario">Nombre de usuario:</label><br>
+      {{ form.usuario }}
+    </p>
+
+    <p>
+      <label for="id_contraseña">Contraseña:</label><br>
+      {{ form.contraseña }}
+    </p>
+
+    <p>
+      <label for="id_correo">Correo electrónico:</label><br>
+      {{ form.correo }}
+    </p>
+
+    <p>
+      <label for="id_direccion">Dirección:</label><br>
+      {{ form.direccion }}
+    </p>
+
+    <p>
+      <label for="id_telefono">Teléfono:</label><br>
+      {{ form.telefono }}
+    </p>
+
+    <button type="submit" class="btn btn-success">Crear cuenta</button>
+  </form>
+</div>
+{% endblock %}

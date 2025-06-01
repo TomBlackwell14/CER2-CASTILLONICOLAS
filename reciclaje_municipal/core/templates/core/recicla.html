@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block titulo %}Recicla Ahora{% endblock %}
+
+{% block contenido %}
+<div class="container mt-4">
+  <h2>Solicitar Retiro de Material Reciclable</h2>
+  
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="id_tipo_material" class="form-label">Tipo de material</label>
+      {{ form.tipo_material }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_cantidad" class="form-label">Cantidad (en kilogramos)</label>
+      {{ form.cantidad }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_fecha_retiro" class="form-label">Fecha de retiro</label>
+      {{ form.fecha_retiro|add_class:"form-control w-auto" }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_direccion_retiro" class="form-label">Dirección de retiro</label>
+      {{ form.direccion_retiro }}
+    </div>
+
+    <div class="mb-3">
+      <label for="id_comentario" class="form-label">Comentario</label>
+      {{ form.comentario }}
+    </div>
+
+    <button type="submit" class="btn btn-success">Enviar solicitud</button>
+  </form>
+</div>
+{% endblock %}
+

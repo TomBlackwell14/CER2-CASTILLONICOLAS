@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}Reciclaje Municipal{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+
+<body>
+  <nav style="background-color: green; padding: 10px;">
+    <div style="max-width: 900px; margin: 0 auto; color: white;">
+      <a href="{% url 'inicio' %}" style="color: white; margin-right: 15px;">Inicio</a>
+      <a href="{% url 'informacion' %}" style="color: white; margin-right: 15px;">Información</a>
+
+      {% if user.is_authenticated %}
+        <a href="{% url 'perfil' %}" style="color: white; margin-right: 15px;">Perfil</a>
+        <a href="{% url 'recicla_ahora' %}" style="color: white; margin-right: 15px;">Recicla Ahora</a>
+        <form method="post" action="{% url 'logout' %}" style="display: inline;">
+          {% csrf_token %}
+          <button type="submit" style="background: none; border: none; color: white; cursor: pointer;">Cerrar sesión</button>
+        </form>
+      {% else %}
+        <a href="{% url 'registrate' %}" style="color: white; margin-right: 15px;">Regístrate</a>
+        <a href="{% url 'inicio_sesion' %}" style="color: white;">Inicia sesión</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  {% if messages %}
+    <div style="max-width: 800px; margin: 20px auto;">
+      {% for message in messages %}
+        <div style="padding: 10px; border: 1px solid #ccc; margin-bottom: 10px;">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div style="max-width: 800px; margin: 30px auto;">
+    {% block contenido %}{% endblock %}
+  </div>
+</body>
+</html>

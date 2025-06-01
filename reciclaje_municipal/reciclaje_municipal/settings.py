@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',  # Importantisino no olvidar
+
+    'widget_tweaks',
+    'core'
 ]
 
 MIDDLEWARE = [
@@ -124,3 +126,25 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# Redirección después de iniciar sesión por que estoy usando el login de Django
+LOGIN_REDIRECT_URL = '/perfil/'
+
+
+LOGOUT_REDIRECT_URL = 'inicio'
+
+
+# settings.py
+STATIC_URL = '/static/'
+
+# Si estás en desarrollo:
+STATICFILES_DIRS = [ BASE_DIR / "static", ]
+
+
+
+LANGUAGE_CODE = 'es-cl'
+TIME_ZONE = 'America/Santiago'
+
+
