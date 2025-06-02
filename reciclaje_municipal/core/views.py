@@ -3,41 +3,39 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.utils.timesince import timesince
-from django.db.models import Count, Avg
-from django.db.models.functions import TruncMonth
-
+from django.db.models import Count, Avg, F, ExpressionWrapper, DurationField
 from .models import SolicitudRetiro, Ciudadano
 from .formularios import RegistroCiudadanoForm, SolicitudRetiroForm
 
 
 # Página de inicio con métricas
+from django.db.models import Count, Avg, F, ExpressionWrapper, DurationField
+
 def inicio(request):
-    # MÉTRICA 1: Solicitudes por mes
-    solicitudes_por_mes = (
-        SolicitudRetiro.objects
-        .annotate(mes=TruncMonth('creado_en'))
-        .values('mes')
-        .annotate(total=Count('id'))
-        .order_by('mes')
-    )
 
-    # MÉTRICA 2: Tipos de materiales más reciclados
-    materiales_mas_reciclados = (
-        SolicitudRetiro.objects
-        .values('tipo_material')
-        .annotate(total=Count('tipo_material'))
-        .order_by('-total')[:5]
-    )
+    materiales = SolicitudRetiro.objects.values('tipo_material').annotate(total=Count('id'))
+    promedio_kg = SolicitudRetiro.objects.aggregate(
+        promedio=Avg('cantidad')
+    )['promedio'] or 0
 
-    # MÉTRICA 3: Promedio de cantidad reciclada (en kg)
-    promedio_kg = SolicitudRetiro.objects.aggregate(promedio=Avg('cantidad'))['promedio']
+    # Tiempo promedio
+    tiempo_promedio = SolicitudRetiro.objects.filter(
+        estado='completado',
+        completado_en__isnull=False
+    ).annotate(
+        duracion=ExpressionWrapper(
+            F('completado_en') - F('creado_en'),
+            output_field=DurationField()
+        )
+    ).aggregate(
+        promedio_duracion=Avg('duracion')
+    )['promedio_duracion']
 
     return render(request, 'core/inicio.html', {
-        'solicitudes_por_mes': solicitudes_por_mes,
-        'materiales_mas_reciclados': materiales_mas_reciclados,
-        'promedio_kg': promedio_kg,
+        'materiales': materiales,
+        'promedio_kg': round(promedio_kg, 2),
+        'tiempo_promedio': tiempo_promedio,
     })
-
 
 # Página de información general
 def informacion(request):
@@ -62,7 +60,6 @@ def registrate(request):
                     direccion=form.cleaned_data['direccion'],
                     telefono=form.cleaned_data['telefono'],
                 )
-                messages.success(request, '¡Cuenta creada con éxito!')
                 return redirect('inicio_sesion')
     else:
         form = RegistroCiudadanoForm()
@@ -80,7 +77,6 @@ def perfil(request):
     except Ciudadano.DoesNotExist:
         ciudadano = None
         solicitudes = []
-        messages.warning(request, 'No hay datos del ciudadano asociados.')
 
     return render(request, 'core/perfil.html', {
         'ciudadano': ciudadano,
@@ -97,7 +93,6 @@ def recicla_ahora(request):
             solicitud = form.save(commit=False)
             solicitud.ciudadano = request.user
             solicitud.save()
-            messages.success(request, 'Solicitud enviada correctamente.')
             return redirect('perfil')
     else:
         form = SolicitudRetiroForm()
@@ -110,6 +105,5 @@ def eliminar_solicitud(request, solicitud_id):
     solicitud = get_object_or_404(SolicitudRetiro, id=solicitud_id, ciudadano=request.user)
     if request.method == 'POST':
         solicitud.delete()
-        messages.success(request, 'Solicitud eliminada correctamente.')
         return redirect('perfil')
     return render(request, 'core/eliminar_confirmacion.html', {'solicitud': solicitud})

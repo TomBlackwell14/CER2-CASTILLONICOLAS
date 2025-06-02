@@ -37,3 +37,10 @@ h1, h2, h3, h4 {
 .btn-verde:hover {
   background-color: #388e3c;
 }
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5); 
+  padding: 10px;
+  border-radius: 10px;
+}
+

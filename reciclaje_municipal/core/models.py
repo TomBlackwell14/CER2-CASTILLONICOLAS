@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.db.models import Avg, Count, Q, F, ExpressionWrapper, DurationField
+from django.utils import timezone
 
 class Ciudadano(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -36,6 +37,7 @@ class SolicitudRetiro(models.Model):
     estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='pendiente')
     operario_asignado = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, related_name='retiros_asignados')
     creado_en = models.DateTimeField(auto_now_add=True)
+    completado_en = models.DateTimeField(null=True, blank=True)  # NUEVO CAMPO
 
     def __str__(self):
         return f"{self.get_tipo_material_display()} - {self.ciudadano.username}"

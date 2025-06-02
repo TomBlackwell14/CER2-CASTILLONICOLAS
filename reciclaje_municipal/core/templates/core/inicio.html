@@ -13,4 +13,59 @@
     {% endif %}
   </div>
 </div>
+
+<!-- MÉTRICAS -->
+<div class="container mt-5">
+
+<div class="container mt-5">
+  <h4 class="mb-3">Estadísticas del Sistema</h4>
+  <div class="row">
+
+    <!-- Cantidad por tipo de material -->
+    <div class="col-md-4 mb-3">
+      <div class="card text-white bg-info h-100">
+        <div class="card-body">
+          <h5 class="card-title">Solicitudes por tipo</h5>
+          <ul class="list-unstyled">
+            {% for mat in materiales %}
+              <li>
+                <strong>{{ mat.tipo_material }}:</strong> {{ mat.total }}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Promedio de peso -->
+    <div class="col-md-4 mb-3">
+      <div class="card text-white bg-secondary h-100">
+        <div class="card-body">
+          <h5 class="card-title">Promedio de peso</h5>
+          <p class="card-text display-6">{{ promedio_kg }} kg</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tiempo promedio de atención -->
+    <div class="col-md-4 mb-3">
+      <div class="card text-white bg-warning h-100">
+        <div class="card-body">
+          <h5 class="card-title">Tiempo Promedio</h5>
+          <p class="card-text display-6">
+            {% if tiempo_promedio %}
+              {{ tiempo_promedio|timesince:"0" }}
+            {% else %}
+              No disponible
+            {% endif %}
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+</div>
 {% endblock %}

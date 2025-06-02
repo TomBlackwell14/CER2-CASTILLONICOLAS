@@ -26,9 +26,8 @@
 
 <hr>
 
-<h2>Recomendaciones </h2>
-
-<div style="width: 80%; max-width: 500px; margin: 0 auto;">
+<h2>Recomendaciones</h2>
+<div class="container my-4" style="max-width: 500px;">
   <div id="recomendacionesCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
 
@@ -69,13 +68,18 @@
 
     </div>
 
+    <!-- CONTROLES -->
     <button class="carousel-control-prev" type="button" data-bs-target="#recomendacionesCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
     </button>
+
     <button class="carousel-control-next" type="button" data-bs-target="#recomendacionesCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
     </button>
   </div>
 </div>
+
 
 {% endblock %}
