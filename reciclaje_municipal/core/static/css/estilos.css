@@ -1,7 +1,39 @@
 
 
+body {
+  background-color: #f0f4f7;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
 
-.img-carrusel {
-  height: 300px;
-  object-fit: cover;
+h1, h2, h3, h4 {
+  color: #1b5e20;
+}
+
+.container-principal {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.card-info {
+  background-color: #ffffff;
+  padding: 25px;
+  margin: 15px auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+}
+
+.btn-verde {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 15px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-verde:hover {
+  background-color: #388e3c;
 }

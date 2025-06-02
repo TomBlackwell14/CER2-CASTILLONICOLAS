@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),        
-    path('', include('core.urls')),      # Todas las rutas de core se usan
+    path('admin/', admin.site.urls),
+    path('', include('core.urls')),  # o el nombre de tu app
+    path('accounts/', include('django.contrib.auth.urls')),  # ESTO ES CLAVE
 ]

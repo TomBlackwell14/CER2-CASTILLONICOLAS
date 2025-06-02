@@ -2,47 +2,15 @@
 {% block titulo %}Inicio{% endblock %}
 
 {% block contenido %}
-<div class="container mt-4">
-  <h2>Bienvenido al Sistema de Reciclaje Municipal</h2>
-
-  <div class="card mb-4">
-    <div class="card-header bg-success text-white">
-      <h5>Métricas de Reciclaje</h5>
-    </div>
-    <div class="card-body">
-
-      <div class="mb-3">
-        <h6>Solicitudes por Mes:</h6>
-        <ul>
-          {% for item in solicitudes_por_mes %}
-            <li>{{ item.mes|date:"F Y" }}: {{ item.total }} solicitudes</li>
-          {% empty %}
-            <li>No hay datos disponibles.</li>
-          {% endfor %}
-        </ul>
-      </div>
-
-      <div class="mb-3">
-        <h6>Materiales más reciclados:</h6>
-        <ul>
-          {% for item in materiales_mas_reciclados %}
-            <li>{{ item.tipo_material }}: {{ item.total }} solicitudes</li>
-          {% empty %}
-            <li>No hay datos disponibles.</li>
-          {% endfor %}
-        </ul>
-      </div>
-
-      <div>
-        <h6>Promedio de cantidad reciclada (solo en kilogramos):</h6>
-        {% if promedio_kg %}
-          <p>{{ promedio_kg|floatformat:1 }} kg por solicitud</p>
-        {% else %}
-          <p>No hay datos suficientes.</p>
-        {% endif %}
-      </div>
-
-    </div>
+<div class="container-principal">
+  <h1>Bienvenido al Sistema de Reciclaje Municipal</h1>
+  <div class="card-info">
+    <p>¡Gracias por ser parte del cambio! A través de esta plataforma puedes solicitar retiros de materiales reciclables, ver el estado de tus solicitudes y conocer el impacto de tu comunidad.</p>
+    {% if user.is_authenticated %}
+      <a href="{% url 'perfil' %}" class="btn-verde">Ir a mi Perfil</a>
+    {% else %}
+      <a href="{% url 'login' %}" class="btn-verde">Iniciar Sesión</a>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
