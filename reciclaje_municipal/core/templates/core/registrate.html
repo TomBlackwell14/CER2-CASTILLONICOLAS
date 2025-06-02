@@ -3,36 +3,41 @@
 {% block titulo %}Registro de Ciudadano{% endblock %}
 
 {% block contenido %}
-<div style="max-width: 600px; margin: 30px auto;">
+<div class="container mt-4">
   <h2>Registrarse</h2>
-
+  
   <form method="post">
     {% csrf_token %}
-
-    <p>
-      <label for="id_usuario">Nombre de usuario:</label><br>
+    
+    <!-- Campo: Nombre de usuario -->
+    <div class="mb-3">
+      <label for="id_usuario" class="form-label">Nombre de usuario</label>
       {{ form.usuario }}
-    </p>
+    </div>
 
-    <p>
-      <label for="id_contraseña">Contraseña:</label><br>
+    <!-- Campo: Contraseña -->
+    <div class="mb-3">
+      <label for="id_contraseña" class="form-label">Contraseña</label>
       {{ form.contraseña }}
-    </p>
+    </div>
 
-    <p>
-      <label for="id_correo">Correo electrónico:</label><br>
+    <!-- Campo: Correo -->
+    <div class="mb-3">
+      <label for="id_correo" class="form-label">Correo electrónico</label>
       {{ form.correo }}
-    </p>
+    </div>
 
-    <p>
-      <label for="id_direccion">Dirección:</label><br>
+    <!-- Campo: Dirección -->
+    <div class="mb-3">
+      <label for="id_direccion" class="form-label">Dirección</label>
       {{ form.direccion }}
-    </p>
+    </div>
 
-    <p>
-      <label for="id_telefono">Teléfono:</label><br>
+    <!-- Campo: Teléfono -->
+    <div class="mb-3">
+      <label for="id_telefono" class="form-label">Teléfono</label>
       {{ form.telefono }}
-    </p>
+    </div>
 
     <button type="submit" class="btn btn-success">Crear cuenta</button>
   </form>

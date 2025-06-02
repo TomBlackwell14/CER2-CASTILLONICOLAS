@@ -79,6 +79,7 @@ LOGIN_URL = 'inicio_sesion'
 LOGIN_REDIRECT_URL = '/perfil/'
 LOGOUT_REDIRECT_URL = 'inicio'
 
+
 # Campo primario por defecto
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
